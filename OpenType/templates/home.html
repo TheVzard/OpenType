@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
+{% block title %}Home{% endblock %}
+
+{% block for-home %}
+{% if user.is_authenticated %}
+<li><a href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a></li>
+{% else %}
+<li><a href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a></li>
+
+{% endif %}
+{% endblock %}
+
 {% block content %}
-
-<div class="container">
-  <div class="row">
-    <div class="jumbotron">
-      <h1>Hello</h1>
-      <p>You are on home page</p>
-    </div>
-  </div>
-</div>
-
+{% if user.is_authenticated %}
+<h1>Hi {{user.username}}!!</h1>
+{% else %}
+<h1> please login or sign up </h1>
+{% endif %}
 {% endblock %}
